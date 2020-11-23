@@ -1,12 +1,11 @@
-def derivation (x: float, func: callable) -> float:
-    delta = 1e-5
-    x_left, x_right = func(x), func(x + delta)
-    value = (x_right - x_left) / delta
-    return value
+def function_1(x): 
+    return np.cos(x) + 0.05*(x**3) + np.log2(x**2)
 
-def func_first(x):
-    return np.cos(x) + 0.05*x**3 + np.log2(x**2)
+def derivation(x, function):
+    delta_x = 1e-10
+    lim_x = (function(x + delta_x) - function(x))/delta_x
+    return lim_x
 
-value = derivation(10, func_first)
-print(round(value, 2))
+value_1 = derivation(10, function_1)
+print(value_1)
 
