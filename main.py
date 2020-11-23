@@ -7,5 +7,5 @@ def derivation(x, function):
     return lim_x
 
 value_1 = derivation(10, function_1)
-print(value_1)
+print(round(value_1, 2))
 
