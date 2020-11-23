@@ -7,8 +7,7 @@ def function_1(x):
 def derivation(x, function):
     delta_x = 1e-10
     lim_x = (function(x + delta_x) - function(x))/delta_x
-    return lim_x
+    return round(lim_x, 2)
 
 value_1 = derivation(10, function_1)
-print(round(value_1, 2))
-
+print(value_1)
