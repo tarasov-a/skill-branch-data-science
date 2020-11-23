@@ -1,3 +1,6 @@
+import numpy as np
+import math
+
 def function_1(x): 
     return np.cos(x) + 0.05*(x**3) + np.log2(x**2)
 
