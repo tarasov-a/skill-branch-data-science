@@ -13,11 +13,14 @@ value_1 = derivation(10, function_1)
 print(value_1)
 
 
-def gradient_optimization_one_dim(function, x = 10, max_iterations = 50, epsilone = 0.001):
-    while max_iterations:
-        max_iterations -= 1
-        x = x - epsilone * derivation(x, function)
-    return round(x, 2)
+def gradient_optimization_one_dim(function): # функция градиентного спуска      
+    x_0 = 10 # начальная позиция
+    e = 0.001 # шаг
+    N = 50 # количество итераций
+    
+    for i in range(N):
+        x_0 = x_0 - e*derivation(x_0, function)
+    return round(x_0, 2)
 
 value_3 = gradient_optimization_one_dim(function_1)
 print(value_3)
