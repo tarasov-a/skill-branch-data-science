@@ -12,7 +12,8 @@ def derivation(x, function):
 value_1 = derivation(10, function_1)
 print(value_1)
 
-
+def function_2(x, y): 
+    return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
 
 def gradient(x, y, function):
     list_lims = []
