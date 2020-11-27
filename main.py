@@ -12,19 +12,26 @@ def derivation(x, function):  # задание 1
 value_1 = derivation(10, function_1)
 print(value_1)
 
-def function_2(x, y): # функция 2
-    return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
+def function_2(x1, x2): # функция 2
+    return x1**2*np.cos(x2) + 0.05*(x2)**3 + 3*(x1)**3*np.log2(x2**2)
 
-def gradient(x, y, function): # задание 2
-    list_lims = []
+list_v = [x1, x2]
+
+x1 = 10
+x2 = 1
+
+
+def gradient(list_of_values, function): # задание 2
+    list_lims = []    
     delta = 0.00001
-    lim_x = (function(x + delta, y) - function(x, y)) / delta
+    lim_x = (function(x1 + delta, x2) - function(x1, x2)) / delta
     list_lims.append(round(lim_x, 2))
-    lim_y = (function(x, y + delta) - function(x, y)) / delta
+    lim_y = (function(x1, x2 + delta) - function(x1, x2)) / delta
     list_lims.append(round(lim_y, 2))
     return list_lims
 
-value_3 = gradient(10, 1, function_2)
+
+value_3 = gradient(list_v, function_2)
 print(value_3)
 
 
