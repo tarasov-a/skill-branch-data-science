@@ -20,6 +20,8 @@ def function_2(xx): # функция 2
 
 
 def gradient(xx, function): # задание 2 
+    x1 = xx[0]
+    x2 = xx[1]
     delta = 0.00001 
     lim_x = (function([x1 + delta, x2]) - function([x1, x2])) / delta
     lim_y = (function([x1, x2 + delta]) - function([x1, x2])) / delta        
