@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def function_1(x):   
+def function_1(x):  # функция 1
     return np.cos(x) + 0.05*(x**3) + np.log2(x**2)
 
 def derivation(x, function):  # задание 1    
@@ -12,7 +12,7 @@ def derivation(x, function):  # задание 1
 value_1 = derivation(10, function_1)
 print(value_1)
 
-def function_2(x, y): 
+def function_2(x, y): # функция 2
     return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
 
 def gradient(x, y, function): # задание 2
