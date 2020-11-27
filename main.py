@@ -13,6 +13,20 @@ value_1 = derivation(10, function_1)
 print(value_1)
 
 
+
+def gradient(x, y, function):
+    list_lims = []
+    delta = 0.00001
+    lim_x = (function(x + delta, y) - function(x, y)) / delta
+    list_lims.append(round(lim_x, 2))
+    lim_y = (function(x, y + delta) - function(x, y)) / delta
+    list_lims.append(round(lim_y, 2))
+    return list_lims
+
+value_3 = gradient(10, 1, function_2)
+print(value_3)
+
+
 def gradient_optimization_one_dim(function): # функция градиентного спуска      
     x_0 = 10 # начальная позиция
     e = 0.001 # шаг
