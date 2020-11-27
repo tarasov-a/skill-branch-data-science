@@ -14,15 +14,17 @@ def function_2(x, y):
     return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
 
 
-def gradient(x, y, function):
-    delta = 0.00001
-    lim_x = (function(x + delta, y) - function(x, y))/delta
-    lim_y = (function(y + delta, x) - function(y, x))/delta
-    lims = [round(lim_x, 2), round(lim_y, 2)]
-    return lims
-
-value_2 = gradient(10, 1, function_2)
-print(value_2)
+def gradient(list_X, f):
+    
+    values = []
+    delta = 0.0001
+    x1 = list_X[0]
+    x2 = list_X[1]    
+    F = (f(x1+delta, x2) - f(x1, x2))/delta
+    values.append(round(F, 2))
+    F = (f(x1, x2+delta) - f(x1, x2))/delta
+    values.append(round(F, 2))
+    return values
       
 
 
