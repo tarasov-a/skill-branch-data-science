@@ -31,12 +31,6 @@ def gradient(list_of_values, function): # задание 2
     return list_lims
 
 
-values = [10, 1]
-
-value_3 = gradient(values, function_2)
-print(value_3)
-
-
 def gradient_optimization_one_dim(function): # задание 3
     x_0 = 10 # начальная позиция
     e = 0.001 # шаг
