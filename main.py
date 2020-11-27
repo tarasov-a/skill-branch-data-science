@@ -17,14 +17,13 @@ print(value_1)
 def function_2(x1, x2): # функция 2
     return x1**2*np.cos(x2) + 0.05*(x2)**3 + 3*(x1)**3*np.log2(x2**2)
 
-list_v = [x1, x2]
 
-x1 = 10
-x2 = 1
 
 def gradient(list_of_values, function): # задание 2
     list_lims = []    
     delta = 0.00001
+    x1 = list_of_values[0]
+    x2 = list_of_values[1]
     lim_x = (function(x1 + delta, x2) - function(x1, x2)) / delta
     list_lims.append(round(lim_x, 2))
     lim_y = (function(x1, x2 + delta) - function(x1, x2)) / delta
@@ -32,7 +31,9 @@ def gradient(list_of_values, function): # задание 2
     return list_lims
 
 
-value_3 = gradient(list_v, function_2)
+values = [10, 1]
+
+value_3 = gradient(values, function_2)
 print(value_3)
 
 
