@@ -47,7 +47,7 @@ print(value_3)
 
 
 
-def gradient_optimization_multi_dim(function): # задание 3
+def gradient_optimization_multi_dim(function): # задание 4
     delta = 0.00001
     x1, x2 = 4, 10   
     N = 50
