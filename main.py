@@ -13,23 +13,24 @@ value_1 = derivation(10, function_1)
 print(value_1)
 
 
-
-def f(x1, x2): # функция 2
+def function_2(x1, x2): # функция 2
     return x1**2*np.cos(x2) + 0.05*(x2)**3 + 3*(x1)**3*np.log2(x2**2)
 
+def gradient(list_of_values, function): # задание 2
+    list_lims = []    
+    delta = 0.00001    
+    x1 = list_of_values[0]
+    x1 = 10
+    x2 = 1
+    x2 = list_of_values[1]
+    lim_x = (function(x1 + delta, x2) - function(x1, x2)) / delta
+    list_lims.append(round(lim_x, 2))
+    lim_y = (function(x1, x2 + delta) - function(x1, x2)) / delta
+    list_lims.append(round(lim_y, 2))
+    return list_lims
 
-
-def gradient(list_X, f):
-    
-    values = []
-    delta = 0.0001
-    x1 = list_X[0]
-    x2 = list_X[1]   
-    F = (f(x1+delta, x2) - f(x1, x2))/delta
-    values.append(round(F, 2))
-    F = (f(x1, x2+delta) - f(x1, x2))/delta
-    values.append(round(F, 2))
-    return values
+value_3 = gradient(list_lims, function_2)
+print(value_3)
 
 
 def gradient_optimization_one_dim(function): # задание 3
@@ -43,3 +44,20 @@ def gradient_optimization_one_dim(function): # задание 3
 
 value_3 = gradient_optimization_one_dim(function_1)
 print(value_3)
+
+
+
+def gradient_optimization_multi_dim(function): # задание 3
+    delta = 0.00001
+    x1, x2 = 4, 10   
+    N = 50
+    e = 0.001
+    for i in range(N):
+        lim_x = (function(x1 + delta, x2) - function(x1, x2)) / delta 
+        lim_y = (function(x1, x2 + delta) - function(x1, x2)) / delta
+        x1 = x1 - e*lim_x
+        x2 = x2 - e*lim_y
+    return [round(x1, 2), round(x2, 2)]  
+    
+value_4 = gradient_optimization_multi_dim(function_2)
+print(value_4)
