@@ -14,10 +14,6 @@ def function_2(x, y):
     return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
 
 
-def function_2(x, y): 
-    return x**2*np.cos(y) + 0.05*(y)**3 + 3*(x)**3*np.log2(y**2)
-
-
 def gradient(x, y, function):
     delta = 0.00001
     lim_x = (function(x + delta, y) - function(x, y))/delta
