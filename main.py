@@ -45,14 +45,14 @@ print(value_3)
 
 
 
-def gradient_optimization_multi_dim(function): # задание 4
+def gradient_optimization_multi_dim(function): # задание 4   
     delta = 0.00001
     x1, x2 = 4, 10   
     N = 50
-    e = 0.001
+    e = 0.001 
     for i in range(N):
-        lim_x = (function(x1 + delta, x2) - function(x1, x2)) / delta 
-        lim_y = (function(x1, x2 + delta) - function(x1, x2)) / delta
+        lim_x = (function([x1 + delta, x2]) - function([x1, x2])) / delta
+        lim_y = (function([x1, x2 + delta]) - function([x1, x2])) / delta 
         x1 = x1 - e*lim_x
         x2 = x2 - e*lim_y
     return [round(x1, 2), round(x2, 2)]  
