@@ -12,6 +12,6 @@ def calculate_data_dtypes(x): # Задание 4.
 
 def calculate_cheap_apartment(x): # Задание 5.
     price = 1000000
-    return len(apartments[apartments['cost'] < price])
+    return len(x[x['cost'] < price])
 
 
