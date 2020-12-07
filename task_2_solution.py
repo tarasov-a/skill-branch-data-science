@@ -1,3 +1,7 @@
+import pandas as pd
+import numpy as np
+
+
 def calculate_data_shape(x): # Задание 1.
     return x.shape
 
@@ -14,4 +18,7 @@ def calculate_cheap_apartment(x): # Задание 5.
     price = 1000000
     return len(x[x['cost'] < price])
 
-
+def calculate_squad_in_cheap_apartment(x): # Задание 6.
+    price = 1000000
+    cheap_ap = x[x['cost'] < price]
+    return round(np.mean(cheap_ap['full_sq']))
