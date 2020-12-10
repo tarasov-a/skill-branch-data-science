@@ -36,10 +36,10 @@ def calculate_mean_squared_by_num_rooms(x): # Задание 8.
 def calculate_squared_stats_by_material(x): # Задание 9.
     min_sq = x.groupby(['material'])['full_sq'].min()
     max_sq = x.groupby(['material'])['full_sq'].max()
-    return pd.concat([min_sq, max_sq], axis=1)
+    return pd.concat([round(min_sq, 2), round(max_sq, 2)], axis=1)
 
 def calculate_crosstab(x): # Задание 10.
-    min_price = x.pivot_table('price_doc', index=('sub_area', 'product_type'), aggfunc='min')
+    min_price = x.pivot_table('price_doc', index=('sub_area', 'product_type'), aggfunc='min')    
     max_price = x.pivot_table('price_doc', index=('sub_area', 'product_type'), aggfunc='max')
-    return display(pd.concat([min_price, max_price], axis=1))
+    return pd.concat([min_price, max_price], axis=1)
 
