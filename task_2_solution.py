@@ -16,15 +16,30 @@ def calculate_data_dtypes(x): # Задание 4.
 
 def calculate_cheap_apartment(x): # Задание 5.
     price = 1000000
-    return len(x[x['cost'] < price])
+    return len(x[x['price_doc'] <= price])
 
 def calculate_squad_in_cheap_apartment(x): # Задание 6.
     price = 1000000
-    cheap_ap = x[x['cost'] < price]
+    cheap_ap = x[x['price_doc'] <= price]
     return round(np.mean(cheap_ap['full_sq']))
 
 def calculate_mean_price_in_new_housing(x): # Задание 7.
     rooms = 3
     year = 2010
-    new_ap = x[(x['rooms'] == rooms) & (apartments['year'] >= year)]
-    return round(np.mean(new_ap['cost']))
+    new_ap = x[(x['num_room'] == rooms) & (x['build_year'] >= year)]
+    return round(np.mean(new_ap['price_doc']))
+
+def calculate_mean_squared_by_num_rooms(x): # Задание 8.
+    mean_sq = x.groupby(['num_room'])['full_sq'].mean()
+    return round(mean_sq, 2)  
+
+def calculate_squared_stats_by_material(x): # Задание 9.
+    min_sq = x.groupby(['material'])['full_sq'].min()
+    max_sq = x.groupby(['material'])['full_sq'].max()
+    return round(min_sq, 2), round(max_sq, 2)
+
+def calculate_crosstab(x): # Задание 10.
+    min_price = x.pivot_table('price_doc', index=('sub_area', 'product_type'), aggfunc='min')
+    max_price = x.pivot_table('price_doc', index=('sub_area', 'product_type'), aggfunc='max')
+    return display(pd.concat([min_price, max_price], axis=1))
+
