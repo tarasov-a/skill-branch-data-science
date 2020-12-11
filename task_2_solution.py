@@ -11,9 +11,12 @@ def take_columns(x): # Задание 2.
 def calculate_target_ratio(x, target_name): # Задание 3.
     return round(np.mean(x[target_name]), 2)
 
-def calculate_data_dtypes(x): # Задание 4.   
+def calculate_data_dtypes(x): # Задание 4. 
     types = x.dtypes.value_counts()    
-    return types[0], types[1]
+    return types[0] + types[1], types[2]  
+
+func4 = calculate_data_dtypes(aps)
+print(func4)
 
 def calculate_cheap_apartment(x): # Задание 5.
     price = 1000000
