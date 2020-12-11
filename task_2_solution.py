@@ -40,6 +40,6 @@ def calculate_squared_stats_by_material(x): # Задание 9.
     return round(min_sq, 2), round(max_sq, 2)
 
 def calculate_crosstab(x): # Задание 10.
-    mean_price = aps.pivot_table(index='sub_area', values='price_doc', columns='product_type', aggfunc='mean', fill_value=0)
+    mean_price = x.pivot_table(index='sub_area', values='price_doc', columns='product_type', aggfunc='mean', fill_value=0)
     return round(mean_price, 2)
 
