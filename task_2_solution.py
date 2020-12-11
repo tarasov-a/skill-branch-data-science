@@ -36,7 +36,7 @@ def calculate_mean_squared_by_num_rooms(x): # Задание 8.
 
 def calculate_squared_stats_by_material(x): # Задание 9.
     mean_sq = x.groupby(['material'])['full_sq'].mean()
-    return round(mean_sq, 2
+    return round(mean_sq, 2)
 
 def calculate_crosstab(x): # Задание 10.
     mean_price = x.pivot_table(index='sub_area', values='price_doc', columns='product_type', aggfunc='mean', fill_value=0)
