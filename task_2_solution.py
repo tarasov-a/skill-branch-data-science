@@ -34,7 +34,7 @@ def calculate_mean_squared_by_num_rooms(x): # Задание 8.
     mean_sq = x.groupby(['num_room'])['full_sq'].mean()
     return round(mean_sq, 2)  
 
-def calculate_squared_stats_by_material(x):
+def calculate_squared_stats_by_material(x): # Задание 9.
     max_sq = x.groupby(['material'])['full_sq'].max()
     min_sq = x.groupby(['material'])['full_sq'].min()
     return round(max_sq, 2), round(min_sq, 2)
