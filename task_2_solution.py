@@ -34,8 +34,8 @@ def calculate_mean_squared_by_num_rooms(x): # Задание 8.
     mean_sq = x.groupby(['num_room'])['full_sq'].mean()
     return round(mean_sq, 2)  
 
-def calculate_squared_stats_by_material(x): # Задание 9.
-    max_min = pd.pivot_table(x, index=['material'], values='full_sq', aggfunc={'full_sq': [np.max, np.min]})    
+def calculate_squared_stats_by_material(x): # Задание 8.
+    max_min = pd.pivot_table(x, index='material', values='full_sq', aggfunc={'full_sq': [np.max, np.min]})    
     return np.round(max_min, 2)
 
 def calculate_crosstab(x): # Задание 10.
