@@ -11,4 +11,10 @@ def split_data_into_two_samples(x): # Задание 1.
     x_train, x_test = train_test_split(x, test_size=0.3, shuffle=True, random_state=42)
     return x_train, x_test
 
+def prepare_data(x):
+    price_doc = x['SalePrice']
+    objects = x.select_dtypes(['object'])
+    data_x = x.drop(objects, axis=1).drop(['Id'], axis=1).dropna(axis=1)
+    return data_x, price_doc
+
 
