@@ -12,7 +12,7 @@ def split_data_into_two_samples(x): # Задание 1.
     return x_train, x_test
 
 
-def prepare_data(x):
+def prepare_dataa(x):
     price_doc = x['SalePrice']
     objects = x.select_dtypes(['object'])
     data_x = x.drop(objects, axis=1).drop(['Id'], axis=1).dropna(axis=1)
