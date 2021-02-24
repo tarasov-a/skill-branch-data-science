@@ -21,14 +21,12 @@ def scale_data(x, type_of_scaler): # Задание 3
         scaler = StandardScaler()
         x_scaled = scaler.fit_transform(x[numeric_data_features])
         return x_scaled
-    
-def prepare_data(dataframe):  # 2
-    df = dataframe.select_dtypes(exclude='object')
-    price_doc = df['price_doc']
-    df = df.drop(['price_doc'], axis='columns')
-    df = df.drop(['id'], axis='columns')  
-    df = df.dropna(axis='columns')
-    return df, price_doc  
+
+def prepare_data(x): # Задание 2
+    price_doc = x['SalePrice']
+    objects = x.select_dtypes(['object'])
+    data_x = x.drop(objects, axis=1).drop(['Id', 'SalePrice'], axis=1).dropna(axis=1)
+    return data_x, price_doc
  
 
 
