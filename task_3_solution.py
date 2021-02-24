@@ -26,9 +26,9 @@ def prepare_data(dataframe):  # 2
     df = dataframe.select_dtypes(exclude='object')
     price_doc = df['price_doc']
     df = df.drop(['price_doc'], axis='columns')
-    df = df.drop(['id'], axis='columns')
-    # df = df.dropna()
-    df = df.dropna(axis='columns')   
+    df = df.drop(['id'], axis='columns')  
+    df = df.dropna(axis='columns')
+    return df, price_doc  
  
 
 
