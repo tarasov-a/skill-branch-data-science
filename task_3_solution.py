@@ -14,8 +14,33 @@ def split_data_into_two_samples(x): # Задание 1.
 def prepare_data(x): # Задание 2.
     price_doc = x['price_doc']
     objects = x.select_dtypes(['object'])
-    data_x = x.drop(objects, axis=1).drop(['Id'], axis=1).dropna(axis=1)
+    data_x = x.drop(objects, axis=1).drop(['id'], axis=1).dropna(axis=1)
     return data_x, price_doc
+
+def scale_data(x, transformer): # Задание 3.
+    numeric_data_features = x.select_dtypes([np.number]).columns
+    if transformer == MinMaxScaler:        
+        scaler = MinMaxScaler()
+        x_scaled = scaler.fit_transform(x[numeric_data_features])
+        return x_scaled
+    if transformer == StandardScaler:
+        scaler = StandardScaler()
+        x_scaled = scaler.fit_transform(x[numeric_data_features])
+        return x_scaled
+    
+    
+def prepare_data_for_model(x, transformer): # Задание 4.
+    price_doc = x['price_doc']
+    objects = x.select_dtypes(['object'])
+    data_x = x.drop(objects, axis=1).drop(['id', 'price_doc'], axis=1).dropna(axis=1)
+    if transformer == MinMaxScaler:
+        scaler = MinMaxScaler()
+        x_train_scaled = scaler.fit_transform(data_x)
+        return x_train_scaled, price_doc
+    if transformer == StandardScaler:
+        scaler = StandardScaler()
+        x_train_scaled = scaler.fit_transform(data_x)
+        return x_train_scaled, price_doc
  
 
 
