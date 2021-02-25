@@ -22,10 +22,12 @@ def scale_data(df, transformer): # Задание 3.
     x_scaled = transformer.fit_transform(df[numeric_data_features])
     return pd.DataFrame(x_scaled)    
     
-def prepare_data_for_model(dataframe, transformer):  # Задание 4.
-    df, price_doc = prepare_data(dataframe)
-    df = scale_data(df, transformer)
-    return df, price_doc
+def prepare_data_for_model(df, transformer):
+    price_doc = df['price_doc']
+    objects = df.select_dtypes(['object'])
+    data_x = df.drop(objects, axis=1).drop(['id', 'price_doc'], axis=1).dropna(axis=1)
+    x_scaled = transformer.fit_transform(data_x)     
+    return pd.DataFrame(x_scaled), price_doc
 
 def fit_first_linear_model(x_train, y_train): # Задание 5-6.
     model = LinearRegression()
