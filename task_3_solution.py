@@ -32,8 +32,7 @@ def prepare_data_for_model(df, transformer): # Задание 4.
 def fit_first_linear_model(x_train, y_train): # Задание 5.
     model = LinearRegression()
     model.fit(x_train, y_train)    
-    y_train_pred = model.predict(x_train)    
-    return y_train_pred 
+    return model 
  
 
 
