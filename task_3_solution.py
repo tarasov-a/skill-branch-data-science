@@ -29,9 +29,10 @@ def prepare_data_for_model(df, transformer): # Задание 4.
     x_scaled = transformer.fit_transform(data_x)     
     return pd.DataFrame(x_scaled), price_doc
 
-def fit_first_linear_model(x_train, y_train):  # Задание 5-6.
-    model = LinearRegression().fit(x_train, y_train)
-    return model
+def fit_first_linear_model(x_train, y_train): # Задание 5.
+    model = LinearRegression()
+    model.fit(x_train, y_train)    
+    return model 
 
 def evaluate_model(model, x_valid, y_valid):  # Задание 7.
     y_pred = model.predict(x_valid)
