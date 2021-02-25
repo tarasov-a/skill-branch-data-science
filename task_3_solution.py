@@ -34,12 +34,12 @@ def fit_first_linear_model(x_train, y_train): # Задание 5.
     model.fit(x_train, y_train)    
     return model 
 
-def evaluate_model(model, x_valid, y_valid):  # Задание 7.
-    y_pred = model.predict(x_valid)
-    mse = round(mean_squared_error(y_valid, y_pred), 2)
-    mae = round(mean_absolute_error(y_valid, y_pred), 2)
-    r2 = round(r2_score(y_valid, y_pred), 2)
-    return mse#, mae, r2
+def evaluate_model(linreg, x_test, y_test):
+    y_pred = linreg.predict(x_test)
+    mse = mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    return [round(mse, 2), round(mae, 2), round(r2, 2)]
 
 def calculate_model_weights(model, columns): # Задание 8.
     return pd.DataFrame(model, index=columns, columns=["features", "weights"])
