@@ -28,11 +28,11 @@ def prepare_data_for_model(df, transformer): # Задание 4.
     df_scaled = transformer.fit_transform(df)     
     return pd.DataFrame(df_scaled), price_doc
 
-y = data['price_doc']
-data1 = data.select_dtypes(exclude='object').drop(['id', 'price_doc'], axis=1).dropna(axis=1)
+#y = data['price_doc']
+#data1 = data.select_dtypes(exclude='object').drop(['id', 'price_doc'], axis=1).dropna(axis=1)
   
-x_train, x_valid = train_test_split(data1, train_size=0.7, shuffle=True, random_state=42)
-y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=42) 
+#x_train, x_valid = train_test_split(data1, train_size=0.7, shuffle=True, random_state=42)
+#y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=42) 
 
 def fit_first_linear_model(x_train, y_train): # Задание 5.
     scaler = StandardScaler()
