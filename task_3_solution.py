@@ -48,11 +48,11 @@ def fit_first_linear_model(x_train, y_train): # Задание 6.
     model.fit(x_train_scaled, y_train)    
     return model 
 
-def evaluate_model(model, x_valid, y_true): # Задание 7.
+def evaluate_model(model, x_valid, y_valid): # Задание 7.
     y_pred = model.predict(x_valid)
-    mse = round(mean_squared_error(y_true, y_pred), 2)
-    mae = round(mean_absolute_error(y_true, y_pred), 2)
-    r2 = round(r2_score(y_true, y_pred), 2)
+    mse = round(mean_squared_error(y_valid, y_pred), 2)
+    mae = round(mean_absolute_error(y_valid, y_pred), 2)
+    r2 = round(r2_score(y_valid, y_pred), 2)
     return mse, mae, r2
 
 def calculate_model_weights(model, columns): # Задание 8.
