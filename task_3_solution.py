@@ -85,6 +85,13 @@ def evaluate_model(linreg, x_test, y_test):
     r2 = r2_score(y_test, y_pred)
     return [round(mse, 2), round(mae, 2), round(r2, 2)]
 
+def evaluate_model(linreg, x_test, y_test):
+    y_pred = linreg.predict(x_test)
+    mse = mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    return [round(mse, 2), round(mae, 2), round(r2, 2)]
+
 
 # Задание 8
 # написать функцию, которая принимает на вход обученную модель и список названий признаков,
