@@ -14,10 +14,10 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
     
-def evaluate_model(model, x_test, y_test):
-    y_pred = model.predict(x_test)
-    MSE = round(mean_squared_error(y_test, y_pred), 2)
-    MAE = round(mean_absolute_error(y_test, y_pred), 2)
-    R2 = round(r2_score(y_test, y_pred), 2)
-    return [MSE, MAE, R2]
+def evaluate_model(model, x_valid, y_valid): # Задание 7.
+    y_pred = model.predict(x_valid)
+    mse = round(mean_squared_error(y_valid, y_pred), 2)
+    mae = round(mean_absolute_error(y_valid, y_pred), 2)
+    r2 = round(r2_score(y_valid, y_pred), 2)
+    return mse, mae, r2
 
