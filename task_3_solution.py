@@ -51,10 +51,10 @@ def fit_first_linear_model_cop(x_train, y_train):
     
 def evaluate_model(model, x_test, y_test):
     y_pred = model.predict(x_test)
-    MSE = round(mean_squared_error(y_test, y_pred), 2)
-    MAE = round(mean_absolute_error(y_test, y_pred), 2)
-    R2 = round(r2_score(y_test, y_pred), 2)
-    return [MSE, MAE, R2]
+    mse = round(mean_squared_error(y_test, y_pred), 2)
+    mae = round(mean_absolute_error(y_test, y_pred), 2)
+    r2 = round(r2_score(y_test, y_pred), 2)
+    return [mse, mae, r2]
     
 def calculate_model_weights(model, features):
     sorted_weights = sorted(zip(model.coef_, features), reverse=True)
