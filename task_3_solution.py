@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
 def split_data_into_two_samples(df):
-    return train_test_split(df,test_size = 0.3, train_size = 0.7, random_state = 42)
+    return train_test_split(df,test_size = 0.3, train_size = 0.7, shuffle=True, random_state = 42)
     
 def prepare_data(df_main):
     df = df_main.copy()
