@@ -1,64 +1,64 @@
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
+import seaborn as sns
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+from copy import deepcopy
+
+from sklearn.datasets import make_regression
+from sklearn.linear_model import SGDClassifier
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
-def split_data_into_two_samples(df): # Задание 1.  
-    x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=42)
-    return x_train, x_valid
-
-def prepare_data(df): # Задание 2.
-    price_doc = df['price_doc']
-    df = df.select_dtypes(exclude='object')
-    df = df.drop(['id', 'price_doc'], axis=1).dropna(axis=1)
-    return df, price_doc
-
-def scale_data(df, transformer): # Задание 3. 
-    numeric_data_features = df.select_dtypes([np.number]).columns    
-    df_scaled = transformer.fit_transform(df[numeric_data_features])
-    return pd.DataFrame(df_scaled)
-
-def prepare_data_for_model(df, transformer): # Задание 4.
-    price_doc = df['price_doc']
-    df = df.select_dtypes(exclude='object')
-    df = df.drop(['id', 'price_doc'], axis=1).dropna(axis=1)
-    df_scaled = transformer.fit_transform(df)     
-    return pd.DataFrame(df_scaled), price_doc
-
-#y = data['price_doc']
-#data1 = data.select_dtypes(exclude='object').drop(['id', 'price_doc'], axis=1).dropna(axis=1)
-  
-#x_train, x_valid = train_test_split(data1, train_size=0.7, shuffle=True, random_state=42)
-#y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=42) 
-
-def fit_first_linear_model(x_train, y_train): # Задание 5.
-    x_train = x_train.select_dtypes(exclude='object')
-    x_train = x_train.drop(['id', 'price_doc'], axis=1).dropna(axis=1)
-    scaler = StandardScaler()
-    x_train_scaled = scaler.fit_transform(x_train)
+def split_data_into_two_samples(df):
+    return train_test_split(df,test_size = 0.3, train_size = 0.7, random_state = 42)
+    
+def prepare_data(df_main):
+    df = df_main.copy()
+    for x in df.columns:
+        if df[x].dtype == 'object':
+            df.drop(x, axis = 1, inplace = True)
+    df.drop('id', axis = 1, inplace = True)
+    df.dropna(axis = 1, inplace = True)
+    g_var = df['price_doc']
+    df.drop('price_doc', axis = 1, inplace = True)
+    return [df, g_var]
+    
+def scale_data(df_main, scaler = StandardScaler()):
+    df = df_main
+    scaler.fit(df)
+    return scaler.transform(df)
+    
+def prepare_data_for_model(df_main, scaler = StandardScaler()):
+    [df, g_var] = prepare_data(df_main)
+    return [scale_data(df, scaler), g_var]
+    
+def fit_first_linear_model(x_train, y_train):
+    [x_train, y_train, features] = prepare_data_for_model(d_train)
     model = LinearRegression()
-    model.fit(x_train_scaled, y_train)    
-    return model 
+    model.fit(x_train, y_train)
+    return model
 
-def fit_first_linear_model(x_train, y_train): # Задание 6.
-    x_train = x_train.select_dtypes(exclude='object')
-    x_train = x_train.drop(['id', 'price_doc'], axis=1).dropna(axis=1)    
-    scaler = MinMaxScaler()
-    x_train_scaled = scaler.fit_transform(x_train)
+def fit_first_linear_model_cop(x_train, y_train):
+    [x_train, y_train, features] = prepare_data_for_model(d_train, MinMaxScaler())
     model = LinearRegression()
-    model.fit(x_train_scaled, y_train)    
-    return model 
-
-def evaluate_model(model, x_valid, y_valid): # Задание 7.
-    y_pred = model.predict(x_valid)
-    mse = round(mean_squared_error(y_valid, y_pred), 2)
-    mae = round(mean_absolute_error(y_valid, y_pred), 2)
-    r2 = round(r2_score(y_valid, y_pred), 2)
-    return mse, mae, r2
-
-def calculate_model_weights(model, columns): # Задание 8.
-    return pd.DataFrame(model, index=columns, columns=["features", "weights"])
-
+    model.fit(x_train, y_train)
+    return model
+    
+def evaluate_model(model, x_test, y_test):
+    y_pred = model.predict(x_test)
+    MSE = round(mean_squared_error(y_test, y_pred), 2)
+    MAE = round(mean_absolute_error(y_test, y_pred), 2)
+    R2 = round(r2_score(y_test, y_pred), 2)
+    return [MSE, MAE, R2]
+    
+def calculate_model_weights(model, features):
+    sorted_weights = sorted(zip(model.coef_, features), reverse=True)
+    weights = pd.Series([x[0] for x in sorted_weights])
+    features = pd.Series([x[1] for x in sorted_weights])
+    df = pd.DataFrame({'features': features, 'weights': weights})
+    return df
