@@ -35,6 +35,8 @@ def prepare_data_for_model(df, transformer): # Задание 4.
 #y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=42) 
 
 def fit_first_linear_model(x_train, y_train): # Задание 5.
+    x_train = x_train.select_dtypes(exclude='object')
+    x_train = x_train.drop(['id', 'price_doc'], axis=1).dropna(axis=1)
     scaler = StandardScaler()
     x_train_scaled = scaler.fit_transform(x_train)
     model = LinearRegression()
@@ -42,6 +44,8 @@ def fit_first_linear_model(x_train, y_train): # Задание 5.
     return model 
 
 def fit_first_linear_model(x_train, y_train): # Задание 6.
+    x_train = x_train.select_dtypes(exclude='object')
+    x_train = x_train.drop(['id', 'price_doc'], axis=1).dropna(axis=1)    
     scaler = MinMaxScaler()
     x_train_scaled = scaler.fit_transform(x_train)
     model = LinearRegression()
