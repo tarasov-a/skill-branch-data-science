@@ -22,25 +22,20 @@ def prepare_data(df): # Задание 2.
     df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
     return df, y
 
-def fit_first_model(df, y, x_test, y_test): # Задание 3. с удалением лишних столбцов
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)  
+def fit_first_model(df, y, x_test, y_test): # Задание 3.      
     df = df.fillna(0)    
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
     y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=1)
     model = LogisticRegression(random_state=1)
-    model.fit(x_train, y_train)
-    #y_pred_proba_train = model.predict_proba(x_train)[:, 1]
+    model.fit(x_train, y_train)   
     y_pred_proba_valid = model.predict_proba(x_valid)[:, 1]
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score]
 
-def fit_second_model(df, y, x_test, y_test): # Задание 4. с удалением лишних столбцов
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
+def fit_second_model(df, y, x_test, y_test): # Задание 4. 
     df = df.fillna(np.mean(df))
     x_test = x_test.fillna(np.mean(x_test))
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -53,9 +48,7 @@ def fit_second_model(df, y, x_test, y_test): # Задание 4. с удален
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score] 
 
-def fit_third_model(df, y, x_test, y_test): # Задание 5. с удалением лишних столбцов
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
+def fit_third_model(df, y, x_test, y_test): # Задание 5.
     df = df.fillna(df.median(axis=0))
     x_test = x_test.fillna(df.median(axis=0))
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -68,9 +61,7 @@ def fit_third_model(df, y, x_test, y_test): # Задание 5. с удален�
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score]   
 
-def fit_fourth_model(df, y, x_test, y_test): # Задание 6-1.  с удалением лишних столбцов 
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
+def fit_fourth_model(df, y, x_test, y_test): # Задание 6-1. 
     df = df.fillna(0)
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -87,9 +78,7 @@ def fit_fourth_model(df, y, x_test, y_test): # Задание 6-1.  с удал�
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score]
 
-def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.  с удалением лишних столбцов    
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)   
+def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.        
     df = df.fillna(np.mean(df))
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -99,17 +88,14 @@ def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.  с удале
     x_train_scaled = scaler.fit_transform(x_train)
     x_valid_scaled = scaler.transform(x_valid)
     x_test_scaled = scaler.transform(x_test)
-    model.fit(x_train, y_train)
-    #y_pred_proba_train = model.predict_proba(x_train)[:, 1]
+    model.fit(x_train, y_train)    
     y_pred_proba_valid = model.predict_proba(x_valid_scaled)[:, 1]
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score]
 
-def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.  с удалением лишних столбцов
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)      
+def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.   
     df = df.fillna(0)
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -119,17 +105,14 @@ def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.  с удале
     x_train_scaled = scaler.fit_transform(x_train)
     x_valid_scaled = scaler.transform(x_valid)
     x_test_scaled = scaler.transform(x_test)
-    model.fit(x_train, y_train)
-    #y_pred_proba_train = model.predict_proba(x_train)[:, 1]
+    model.fit(x_train, y_train)    
     y_pred_proba_valid = model.predict_proba(x_valid_scaled)[:, 1]
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4) 
     return [valid_score, test_score]
 
-def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2. с удалением лишних столбцов 
-    df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)    
-    x_test = x_test.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)      
+def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2.        
     df = df.fillna(np.mean(df))
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -139,8 +122,7 @@ def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2. с удал�
     x_train_scaled = scaler.fit_transform(x_train)
     x_valid_scaled = scaler.transform(x_valid)
     x_test_scaled = scaler.transform(x_test)
-    model.fit(x_train, y_train)
-    #y_pred_proba_train = model.predict_proba(x_train)[:, 1]
+    model.fit(x_train, y_train)    
     y_pred_proba_valid = model.predict_proba(x_valid_scaled)[:, 1]
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
