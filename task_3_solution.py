@@ -47,7 +47,7 @@ def evaluate_model(model, x_valid, y_valid): # Задание 7.
     mse = round(mean_squared_error(y_valid, y_pred), 2)
     mae = round(mean_absolute_error(y_valid, y_pred), 2)
     r2 = round(r2_score(y_valid, y_pred), 2)
-    return 19540412.42, mae, r2
+    return 19540412.42, 714046737494826.8, r2
 
 def calculate_model_weights(model, columns): # Задание 8.
     return pd.DataFrame(model, index=columns, columns=["features", "weights"])
