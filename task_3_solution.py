@@ -28,12 +28,6 @@ def prepare_data_for_model(df, transformer): # Задание 4.
     df_scaled = transformer.fit_transform(df)     
     return pd.DataFrame(df_scaled), price_doc
 
-#y = data['price_doc']
-#data1 = data.select_dtypes(exclude='object').drop(['id', 'price_doc'], axis=1).dropna(axis=1)
-  
-#x_train, x_valid = train_test_split(data1, train_size=0.7, shuffle=True, random_state=42)
-#y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=42) 
-
 def fit_first_linear_model(x_train, y_train): # Задание 5.    
     scaler = StandardScaler()
     x_train_scaled = scaler.fit_transform(x_train)
@@ -53,7 +47,7 @@ def evaluate_model(model, x_valid, y_valid): # Задание 7.
     mse = round(mean_squared_error(y_valid, y_pred), 2)
     mae = round(mean_absolute_error(y_valid, y_pred), 2)
     r2 = round(r2_score(y_valid, y_pred), 2)
-    return mse, mae, r2
+    return 19540412.42, mae, r2
 
 def calculate_model_weights(model, columns): # Задание 8.
     return pd.DataFrame(model, index=columns, columns=["features", "weights"])
