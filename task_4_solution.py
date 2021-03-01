@@ -3,7 +3,7 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.model_selection import KFold, StratifiedKFold
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, roc_curve
