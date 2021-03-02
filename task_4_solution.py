@@ -22,18 +22,18 @@ def prepare_data(df): # Задание 2.
     df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
     return df, y
 
-def fit_first_model(df, y, x_test, y_test): # Задание 3.
-    df = df.fillna(0)
-    x_test = x_test.fillna(0)
-    x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
-    y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=1)
+def fit_first_model(df, y, x_test, y_test): # Задание 3. ТЕСТ
+    df1 = df.fillna(0)
+    x_test1 = x_test.fillna(0)
+    x_train, x_valid = train_test_split(df1, train_size=0.3, shuffle=True, random_state=1)
+    y_train, y_valid = train_test_split(y, train_size=0.3, shuffle=True, random_state=1)
     model = LogisticRegression(random_state=1)
-    model.fit(x_train, y_train)    
+    model.fit(x_train, y_train)   
     y_pred_proba_valid = model.predict_proba(x_valid)[:, 1]
-    y_pred_proba_test = model.predict_proba(x_test)[:, 1]
-    valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
-    test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [round((valid_score), 4), round((test_score), 4)]
+    y_pred_proba_test = model.predict_proba(x_test1)[:, 1]
+    valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
+    test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4)
+    return [valid_score, test_score] # [0.5146, 0.4931]
 
 def fit_second_model(df, y, x_test, y_test): # Задание 4.
     df = df.fillna(np.mean(df))
