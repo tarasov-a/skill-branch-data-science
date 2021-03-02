@@ -25,15 +25,15 @@ def prepare_data(df): # Задание 2.
 def fit_first_model(df, y, x_test, y_test): # Задание 3. ТЕСТ
     df = df.fillna(0)
     x_test = x_test.fillna(0)
-    x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=10)
-    y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=10)
+    x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
+    y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=1)
     model = LogisticRegression(random_state=1)
     model.fit(x_train, y_train)   
     y_pred_proba_valid = model.predict_proba(x_valid)[:, 1]
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = round(roc_auc_score(y_valid, y_pred_proba_valid), 4)
     test_score = round(roc_auc_score(y_test, y_pred_proba_test), 4)
-    return [valid_score, test_score] # [0.5125, 0.5867]
+    return [valid_score, test_score] # [0.4273, 0.384]
 
 def fit_second_model(df, y, x_test, y_test): # Задание 4.
     df = df.fillna(np.mean(df))
