@@ -25,8 +25,8 @@ def prepare_data(df): # Задание 2.
 def fit_first_model(df, y, x_test, y_test): # Задание 3. ТЕСТ
     df1 = df.fillna(0)
     x_test1 = x_test.fillna(0)
-    x_train, x_valid = train_test_split(df1, train_size=0.65, shuffle=True, random_state=1)
-    y_train, y_valid = train_test_split(y, train_size=0.65, shuffle=True, random_state=1)
+    x_train, x_valid = train_test_split(df1, train_size=0.7, shuffle=True, random_state=10)
+    y_train, y_valid = train_test_split(y, train_size=0.7, shuffle=True, random_state=10)
     model = LogisticRegression(random_state=1)
     model.fit(x_train, y_train)   
     y_pred_proba_valid = model.predict_proba(x_valid)[:, 1]
