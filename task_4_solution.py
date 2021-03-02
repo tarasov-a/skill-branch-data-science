@@ -16,6 +16,7 @@ def calculate_data_stats(df): # Задание 1.
     return df_shape, int_count, obj_count, fraud_result
 
 def prepare_data(df): # Задание 2. 
+    y = df['isFraud']
     df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
     return df, y
 
