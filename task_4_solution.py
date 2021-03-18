@@ -21,7 +21,7 @@ def prepare_data(df): # Задание 2.
     df = df.drop(['isFraud', 'TransactionID', 'TransactionDT'], axis=1)
     return df, y
 
-def fit_first_model(df, y, x_test, y_test): # Задание 3.
+def fit_first_model(df, y, x_test, y_test): # Задание 3. 
     df = df.fillna(0)
     x_test = x_test.fillna(0)
     x_train, x_valid = train_test_split(df, train_size=0.7, shuffle=True, random_state=1)
@@ -32,7 +32,7 @@ def fit_first_model(df, y, x_test, y_test): # Задание 3.
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.5703, 0.589]
+    return [round((valid_score), 4), round((test_score), 4)]
 
 def fit_second_model(df, y, x_test, y_test): # Задание 4.
     df = df.fillna(np.mean(df))
@@ -45,7 +45,7 @@ def fit_second_model(df, y, x_test, y_test): # Задание 4.
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.6583, 0.6994] 
+    return [round((valid_score), 4), round((test_score), 4)]  
 
 def fit_third_model(df, y, x_test, y_test): # Задание 5.
     df = df.fillna(df.median(axis=0))
@@ -58,7 +58,7 @@ def fit_third_model(df, y, x_test, y_test): # Задание 5.
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test) 
-    return [0.6558, 0.6976] 
+    return [round((valid_score), 4), round((test_score), 4)]   
 
 def check_pipeline(x, y, x_test, y_test, pipeline, split=0.3):
     x_train, x_valid = train_test_split(x, train_size=split, shuffle=True, random_state=1)
@@ -83,7 +83,7 @@ def fit_fourth_model(df, y, x_test, y_test): # Задание 6-1.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.6828, 0.7195]
+    return [round((valid_score), 4), round((test_score), 4)]
 
 def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.    
     df = df.fillna(np.mean(df))
@@ -100,7 +100,7 @@ def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid), 
     test_score = roc_auc_score(y_test, y_pred_proba_test) 
-    return [0.6984, 0.7506]
+    return [round((valid_score), 4), round((test_score), 4)]
 
 def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.    
     df = df.fillna(0)
@@ -117,7 +117,7 @@ def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.6952, 0.7267]
+    return [round((valid_score), 4), round((test_score), 4)]
 
 def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2.    
     df = df.fillna(np.mean(df))
@@ -134,7 +134,7 @@ def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.7124, 0.7668]
+    return [round((valid_score), 4), round((test_score), 4)]
 
 def find_best_split(x, y, x_test, y_test): # Задание 8.   
     test_sizes = []
@@ -184,6 +184,6 @@ def choose_best_split(scores): # Задание 9.
             if diff < best_diff:
                 best_test_size = row['Test_size']
                 best_diff = diff
-    return 25000
+    return int(best_test_size)
 
 
