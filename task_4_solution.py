@@ -140,22 +140,18 @@ def find_best_split(x, y, x_test, y_test): # Задание 8.
     test_sizes = []
     scores1 = []
     scores2 = []
-
     x_count = x.shape[0]
-
     for test_size in np.arange(0.1, 1.0, 0.1):
         columns = x.columns
         x2 = x.copy()
         for column in columns:
             median = x2[column].median()
             x2 = x2.fillna(value={column: median})
-
         x2_test = x_test.copy()
         columns = x2_test.columns
         for column in columns:
             median = x2_test[column].median()
             x2_test = x2_test.fillna(value={column: median})
-
         pipeline = Pipeline(memory=None,
                             steps=[
                                 ('scaling', MinMaxScaler()),
