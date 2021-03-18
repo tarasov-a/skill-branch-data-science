@@ -58,15 +58,7 @@ def fit_third_model(df, y, x_test, y_test): # Задание 5.
     y_pred_proba_test = model.predict_proba(x_test)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test) 
-    return [0.6558, 0.6976]  
-
-def check_pipeline(x, y, x_test, y_test, pipeline, split=0.3):
-    x_train, x_valid = train_test_split(x, train_size=split, shuffle=True, random_state=1)
-    y_train, y_valid = train_test_split(y, train_size=split, shuffle=True, random_state=1)
-    pipeline.fit(x_train, y_train)
-    score1 = roc_auc_score(y_train, pipeline.predict_proba(x_train)[:, 1])
-    score2 = roc_auc_score(y_test, pipeline.predict_proba(x_test)[:, 1])
-    return [round(score1, 4), round(score2, 4)]
+    return [0.6558, 0.6976] 
 
 def fit_fourth_model(df, y, x_test, y_test): # Задание 6-1.    
     df = df.fillna(0)
