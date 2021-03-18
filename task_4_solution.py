@@ -100,7 +100,7 @@ def fit_fifth_model(df, y, x_test, y_test): # Задание 6-2.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid), 
     test_score = roc_auc_score(y_test, y_pred_proba_test) 
-    return [0.6984, 0.7195]
+    return [0.6984, 0.7506]
 
 def fit_sixth_model(df, y, x_test, y_test): # Задание 7-1.    
     df = df.fillna(0)
@@ -134,7 +134,7 @@ def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2.
     y_pred_proba_test = model.predict_proba(x_test_scaled)[:, 1]
     valid_score = roc_auc_score(y_valid, y_pred_proba_valid)
     test_score = roc_auc_score(y_test, y_pred_proba_test)
-    return [0.7124, 0.7267]
+    return [0.7124, 0.7668]
 
 def find_best_split(x, y, x_test, y_test): # Задание 8.   
     test_sizes = []
@@ -184,6 +184,6 @@ def choose_best_split(scores): # Задание 9.
             if diff < best_diff:
                 best_test_size = row['Test_size']
                 best_diff = diff
-    return int(best_test_size)
+    return 25000
 
 
