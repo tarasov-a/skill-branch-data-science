@@ -127,5 +127,54 @@ def fit_seventh_model(df, y, x_test, y_test): # Задание 7-2.
     test_score = roc_auc_score(y_test, y_pred_proba_test)
     return [round((valid_score), 4), round((test_score), 4)]
 
+def find_best_split(x, y, x_test, y_test): # Задание 8.   
+    test_sizes = []
+    scores1 = []
+    scores2 = []
+
+    x_count = x.shape[0]
+
+    for test_size in np.arange(0.1, 1.0, 0.1):
+        columns = x.columns
+        x2 = x.copy()
+        for column in columns:
+            median = x2[column].median()
+            x2 = x2.fillna(value={column: median})
+
+        x2_test = x_test.copy()
+        columns = x2_test.columns
+        for column in columns:
+            median = x2_test[column].median()
+            x2_test = x2_test.fillna(value={column: median})
+
+        pipeline = Pipeline(memory=None,
+                            steps=[
+                                ('scaling', MinMaxScaler()),
+                                ('model', LogisticRegression(random_state=1))
+                            ],
+                            verbose=False
+                            )
+        score1,score2 = check_pipeline(x2, y, x2_test, y_test, pipeline, test_size)
+        test_sizes.append(int(test_size * x_count))
+        scores1.append(score1)
+        scores2.append(score2)
+    return pd.DataFrame({'Test_size': test_sizes, 'Score1': scores1, 'Score2': scores2})
+
+def choose_best_split(scores): # Задание 9.
+    best_test_size = -1
+    best_diff = 0
+    for index, row in scores.iterrows():
+        score1 = row['Score1']
+        score2 = row['Score2']
+        diff = (score1 - score2)**2
+
+        if best_test_size == -1:
+            best_test_size = row['Test_size']
+            best_diff = diff
+        else:
+            if diff < best_diff:
+                best_test_size = row['Test_size']
+                best_diff = diff
+    return int(best_test_size)
 
 
